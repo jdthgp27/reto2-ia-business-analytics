@@ -1,100 +1,97 @@
 # 🧠 Reto 2 — Predicción de Venta Cruzada en Seguros de Salud
 
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.15+-orange.svg)](https://tensorflow.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-yellow.svg)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-2.0+-green.svg)](https://xgboost.readthedocs.io/)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](#)
+
 > **Curso:** Business Intelligence y Big Data (Nivel 5) | Odisea Data  
 > **Reto:** Implementación de algoritmos avanzados de IA en Business Analytics  
-> **Dataset:** [Health Insurance Cross Sell Prediction (Kaggle)](https://www.kaggle.com/anmolkumar/health-insurance-cross-sell-prediction)  
+> **Dataset:** [Health Insurance Cross Sell Prediction (Kaggle)](https://www.kaggle.com/datasets/anmolkumar/health-insurance-cross-sell-prediction)  
 > **Entorno:** Google Colab + Python 3.10+
 
-## 📌 Descripción del Proyecto
+---
 
-Una compañía de seguros de salud desea optimizar su estrategia de **venta cruzada** ofreciendo seguros de vehículo a sus clientes actuales. El objetivo de este proyecto es construir un **modelo predictivo de clasificación binaria** que identifique qué asegurados tienen mayor probabilidad de estar interesados en adquirir una póliza de automóvil.
+## 🎯 Resumen
 
-Este tipo de modelo permite a la empresa:
+Modelo predictivo de **clasificación binaria** para identificar qué clientes de una compañía de seguros de salud tienen mayor probabilidad de contratar un seguro de vehículo (venta cruzada).
 
-- **Dirigir sus campañas de marketing** únicamente a los clientes con mayor propensión a la compra.
-- **Reducir costes de comunicación** y mejorar el retorno de la inversión (ROI).
-- **Optimizar su modelo de negocio** y aumentar los ingresos por venta cruzada.
+**Resultado principal:** modelo **LightGBM** con **AUC-ROC de 0.8574**, capaz de detectar el **91% de los clientes interesados**.
 
-El dataset contiene **381.109 registros** de clientes con seguros de salud, con **12 variables** que incluyen datos demográficos, información sobre el vehículo, historial de seguros y el canal de contacto.
+---
 
-## 🎯 Objetivos del Proyecto
+## 🏆 Resultados destacados
 
-1. **Explorar y comprender** el dataset: estructura, variables clave, análisis descriptivo y detección de desbalanceo de clases.
-2. **Preparar y limpiar** los datos: tratamiento de valores nulos, atípicos, codificación de variables categóricas y escalado.
-3. **Desarrollar modelos avanzados de IA**: Random Forest, Gradient Boosting (XGBoost/LightGBM) y redes neuronales profundas.
-4. **Evaluar y comparar** los modelos con métricas robustas para datos desbalanceados: **F1-score, Recall y AUC-ROC**.
-5. **Extraer insights de negocio** e interpretar los resultados con técnicas como **SHAP** y **LIME**.
-6. **Generar recomendaciones prácticas** para la toma de decisiones.
+| Modelo | AUC-ROC | F1-score |
+|---|---|---|
+| 🥇 **LightGBM** | **0.8574** | 0.4383 |
+| 🥈 XGBoost | 0.8568 | 0.4398 |
+| 🥉 Random Forest | 0.8561 | 0.4358 |
+| Logistic Regression | 0.8336 | 0.3988 |
+| MLP Básico (Deep Learning) | 0.8197 | 0.3924 |
+| MLP Profundo (Deep Learning) | 0.7705 | 0.3685 |
 
-## 📊 Variables del Dataset
+📊 **Comparativa visual:** [`outputs/charts/comparativa_final.png`](outputs/charts/comparativa_final.png)
 
-| Variable | Descripción |
-|---|---|
-| `id` | Identificador único del cliente |
-| `Gender` | Género del cliente |
-| `Age` | Edad del cliente |
-| `Driving_License` | 0: No tiene carné, 1: Tiene carné |
-| `Region_Code` | Código de la región del cliente |
-| `Previously_Insured` | 1: Ya tiene seguro de vehículo, 0: No tiene |
-| `Vehicle_Age` | Antigüedad del vehículo |
-| `Vehicle_Damage` | 1: Ha sufrido daños, 0: No ha sufrido daños |
-| `Annual_Premium` | Prima anual que paga el cliente |
-| `PolicySalesChannel` | Canal de contacto (anónimo) |
-| `Vintage` | Días de antigüedad del cliente en la compañía |
-| `Response` | **Variable objetivo:** 1: Interesado, 0: No interesado |
+---
 
-## 🛠️ Stack Tecnológico
+## 🗺️ Pipeline del Proyecto
 
-- **Lenguaje:** Python 3.10+
-- **Manipulación de datos:** Pandas, NumPy
-- **Visualización:** Matplotlib, Seaborn
-- **Machine Learning:** Scikit-learn, XGBoost, LightGBM
-- **Deep Learning:** TensorFlow / Keras
-- **Interpretabilidad:** SHAP, LIME
-- **Entorno:** Google Colab
+| # | Fase | Notebook |
+|---|---|---|
+| 1 | Selección del dataset | `data/raw/` |
+| 2 | Preparación del entorno | `requirements.txt` |
+| 3 | Exploración y EDA | [`notebooks/01_exploracion.ipynb`](notebooks/01_exploracion.ipynb) |
+| 4 | Limpieza y transformación | [`notebooks/02_preparacion.ipynb`](notebooks/02_preparacion.ipynb) |
+| 5a | Modelos ML clásico | [`notebooks/03_modelos_ml.ipynb`](notebooks/03_modelos_ml.ipynb) |
+| 5b | Modelos Deep Learning | [`notebooks/04_modelos_deep_learning.ipynb`](notebooks/04_modelos_deep_learning.ipynb) |
+| 6 | Evaluación | [`notebooks/03_modelos_ml.ipynb`](notebooks/03_modelos_ml.ipynb) |
+| 7 | Interpretabilidad (SHAP) | [`notebooks/05_interpretabilidad.ipynb`](notebooks/05_interpretabilidad.ipynb) |
+| 8 | Recomendaciones de negocio | [`reports/recomendaciones.md`](reports/recomendaciones.md) |
 
-## 📁 Estructura del Proyecto
+---
+
+## 🔍 Hallazgos principales
+
+### Top 3 variables más influyentes
+1. **`Previously_Insured`** — Los clientes ya asegurados casi nunca contratan (tasa de conversión ~0.1%).
+2. **`Vehicle_Damage`** — Los clientes con vehículo dañado convierten ~46 veces más.
+3. **`Age`** — Los clientes entre 30 y 50 años muestran la mayor propensión.
+
+### Insights de negocio
+- ✅ **Excluir clientes ya asegurados** ahorra ~45% del coste de campaña.
+- ✅ **Concentrar el 80% del esfuerzo comercial en el 11% de clientes** con mayor probabilidad.
+- ✅ **Aplicar el modelo a otros productos** (hogar, vida) para escalar el ROI.
+
+📊 **Informe completo:** [`reports/informe_analisis.md`](reports/informe_analisis.md)  
+💼 **Recomendaciones de negocio:** [`reports/recomendaciones.md`](reports/recomendaciones.md)
+
+---
+
+## 📦 Estructura del proyecto
 
 ```text
 reto2-ia-business-analytics/
-├── data/                  # Datasets (raw, processed, external)
-├── notebooks/             # Jupyter Notebooks por fase
-├── scripts/               # Código reutilizable (preprocess, train, evaluate)
-├── models/                # Modelos entrenados y scalers
-├── outputs/               # Gráficos, métricas y capturas de pantalla
-├── reports/               # Informes en Markdown
-└── presentation/          # Presentación final de resultados
+├── data/              # Datasets (raw, processed, external)
+├── notebooks/         # Jupyter Notebooks por fase (01-05)
+├── scripts/           # Código reutilizable
+├── models/            # Modelos entrenados y scalers
+├── outputs/           # Gráficos, métricas y capturas
+├── reports/           # Informes en Markdown
+└── presentation/      # Presentación final
 ```
 
-## 🗺️ Fases del Proyecto
+---
 
-| # | Fase | Notebook |
-|---|------|----------|
-| 1 | Selección del dataset | `data/raw/` |
-| 2 | Preparación del entorno | `requirements.txt` |
-| 3 | Importación y exploración | `notebooks/01_exploracion.ipynb` |
-| 4 | Limpieza y transformación | `notebooks/02_preparacion.ipynb` |
-| 5 | Modelos avanzados de IA | `notebooks/03_modelos_ml.ipynb` y `notebooks/04_modelos_deep_learning.ipynb` |
-| 6 | Evaluación de modelos | `notebooks/05_evaluacion.ipynb` |
-| 7 | Interpretación de resultados | `outputs/charts/` y `reports/analisis_kpi.md` |
-| 8 | Recomendaciones | `reports/recomendaciones.md` |
-
-## 📈 Resultados Esperados
-
-- **Modelo con mejor rendimiento:** XGBoost o Random Forest, con un **AUC-ROC superior a 0.85**.
-- **Variables más influyentes:** `Previously_Insured`, `Vehicle_Damage` y `Age`.
-- **Recomendaciones de negocio:** Estrategias de contacto segmentadas por perfil de cliente y canal óptimo.
-
-## 🚀 Cómo Ejecutar
+## 🚀 Cómo ejecutar
 
 ### En Google Colab
-
 1. Abre el notebook deseado desde `notebooks/`.
 2. Súbelo a Colab (`Archivo > Subir notebook`).
 3. Ejecuta las celdas en orden.
 
 ### En local
-
 ```bash
 git clone https://github.com/jdthgp27/reto2-ia-business-analytics.git
 cd reto2-ia-business-analytics
@@ -104,14 +101,34 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
+---
+
+## 🛠️ Stack Tecnológico
+
+- **Lenguaje:** Python 3.10+
+- **Datos:** Pandas, NumPy
+- **ML clásico:** Scikit-learn, XGBoost, LightGBM
+- **Deep Learning:** TensorFlow, Keras
+- **Interpretabilidad:** SHAP
+- **Visualización:** Matplotlib, Seaborn
+
+---
+
 ## 📦 Entregables
 
-- [ ] **1. Código del proyecto** → `scripts/` y `notebooks/`
-- [ ] **2. Informe del análisis** → `reports/informe_analisis.md`
-- [ ] **3. Modelo entrenado reutilizable** → `models/trained/`
-- [ ] **4. Presentación de resultados** → `presentation/`
+- [x] **1. Código del proyecto** → `notebooks/` y `scripts/`
+- [x] **2. Informe del análisis** → [`reports/informe_analisis.md`](reports/informe_analisis.md)
+- [x] **3. Modelo entrenado reutilizable** → `models/trained/`
+- [x] **4. Presentación de resultados** → `presentation/`
+
+---
 
 ## 👤 Autor
 
 **Judit Giravent**  
-Business Analytics Student | Odisea Data
+Business Analytics Student | Odisea Data  
+[LinkedIn](https://linkedin.com/in/judit-giravent-27b167156)
+
+---
+
+*Proyecto desarrollado como parte del curso Business Intelligence y Big Data de Odisea Data. Septiembre 2026.*
